@@ -23,6 +23,31 @@ const NFTDropPage = () => {
         </div>
       </div>
       {/* right */}
+      <div className="flex flex-1 flex-col lg:col-span-6 p-12">
+        <header className="flex items-center justify-between ">
+          <h1 className="sm:w-80 w-52 cursor-pointer text-xl font-extralight">
+            The{" "}
+            <span className="font-extrabold underline decoration-pink-600/50">
+              PAPAFAM
+            </span>{" "}
+            NFT Market Place
+          </h1>
+          <button className="rounded-full bg-rose-400 px-4 py-2 text-xs font-bold text-white lg:px-5 lg:py-3 lg:text-base">
+            Sign In
+          </button>
+        </header>
+        <hr className="my-2 border" />
+
+        {/* content */}
+        <div className="mt-10 flex flex-1 flex-col items-center space-y-6 text-center lg:space-y-0 lg:justify-center">
+            <img className="w-80 object-cover pb-10 lg:h-40 " src="https:/links.papareact.com/bdy" alt="" />
+            <h1 className="text-3xl font-bold lg:text-5xl lg:font-extrabold">The PAPAFAM Ape Coding Club | NFT Drop</h1>
+            <p className="p-2 text-xl text-green-500">13 / 21 NFT's claimed</p>
+        </div>
+
+        {/* mint button */}
+        <button className="h-16 w-full bg-red-600 rounded-full text-white mt-10 font-bold">Mint NFT (0.01 ETH)</button>
+      </div>
     </div>
   );
 };
