@@ -37,4 +37,4 @@ next-env.d.ts
 
 /package-lock.json
 
-/nft-challenge/node_modules
+/sanity/node_modules
