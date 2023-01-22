@@ -1,20 +1,96 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAddress, useDisconnect, useMetamask } from "@thirdweb-dev/react";
 import { GetServerSideProps } from "next";
 import { sanityClient, urlFor } from "../../sanity";
 import { Collection } from "../../typings";
 import Link from "next/link";
+import { BigNumber } from "ethers";
+import { NFTDrop } from "@thirdweb-dev/sdk";
 
 interface Props {
   collection: Collection
 }
 
 const NFTDropPage = ({collection}: Props) => {
+
+  // const [claimedSupply, setClaimedSupply] = useState<Number>(0);
+  // const [totalSupply, setTotalSupply] = useState<BigNumber>();
+  // const [loading, setLoading] = useState<boolean>(true);
+  // const [priceInEth, setPriceInEth] = useState<string>();
+
+  const address = "Oxsjshjhjhd738393983839te76";
+  const loading = false;
+  
+  
+
+  
+  
+
   //Auth
-  const connectWithMetamask = useMetamask();
-  const address = useAddress();
-  const disconnect = useDisconnect();
+  // const connectWithMetamask = useMetamask();
+  // const address = useAddress();
+  // const disconnect = useDisconnect();
+  
+  
   //--
+
+
+  // useEffect(() => {
+  //   if(!nftDrop) return
+
+  //   const fetchPrice = async () => {
+  //     const claimConditions = await nftDrop.claimConditions.getAll();
+  //     setPriceInEth(claimConditions?.[0].currencyMetadata.displayValue)
+  //   }
+  //   fetchPrice();
+
+  // }, [nftDrop]);
+
+  // useEffect(() => {
+  //   if(!nftDrop) return
+
+  //   const fetchNFTDropData = async () => {
+  //     setLoading(true);
+
+  //     const claimed = await nftDrop.totalClaimedSupply();
+  //     const total = await nftDrop.totalSupply();
+
+  //     setTotalSupply(total);
+
+
+  //     setLoading(false);
+  //   }
+  //   fetchNFTDropData();
+
+  // }, [nftDrop]);
+
+  // console.log(totalSupply?.toNumber());
+  
+
+  // const mintNft = () => {
+  //   if(!nftDrop || !address) return;
+
+  //   const quantity = 1; // how many unique NFT's you want to claim
+
+  //   setLoading(true);
+
+  //   nftDrop?.claimTo(address, quantity).then(async (tx) => {
+  //     const receipt = tx[0].receipt //the transaction receipt
+  //     const claimedTokenId = tx[0].id //the id of the NFT claimed
+  //     const claimedNFT = await tx[0].data // (optional) get the claimed NFT metadata
+
+
+  //     console.log(receipt);
+  //     console.log(claimedTokenId);
+  //     console.log(claimedNFT);
+
+
+  //   }).catch((err) => console.log(err)
+  //   ).finally(() => {
+  //     setLoading(false);
+  //   });
+  // }
+  
 
   return (
     
@@ -42,6 +118,7 @@ const NFTDropPage = ({collection}: Props) => {
       {/* right */}
       <div className="flex flex-1 flex-col lg:col-span-6 p-12">
         <header className="flex items-center justify-between ">
+
           <Link href={'/'}>
             <h1 className="sm:w-80 w-52 cursor-pointer text-xl font-extralight">
               The{" "}
@@ -53,7 +130,7 @@ const NFTDropPage = ({collection}: Props) => {
           </Link>
 
           <button
-            onClick={() => (address ? disconnect() : connectWithMetamask())}
+            onClick={() => {}}
             className="rounded-full bg-rose-400 px-4 py-2 text-xs font-bold text-white lg:px-5 lg:py-3 lg:text-base"
           >
             {address ? "Singn Out" : "Singn In"}
@@ -75,12 +152,39 @@ const NFTDropPage = ({collection}: Props) => {
           <h1 className="text-3xl font-bold lg:text-5xl lg:font-extrabold">
           {collection?.title}
           </h1>
-          <p className="p-2 text-xl text-green-500">13 / 21 NFT's claimed</p>
+
+          { loading ? (
+             <p className="animate-pulse p-2 text-xl text-green-500">
+             Loading Supply Count...</p>
+          ) : (
+            <p className="p-2 text-xl text-green-500">
+              NFT's claimed</p>
+          )}
+
+          { loading && (
+            <img 
+            className="h-52 w-52 object-contain"
+            src="https://cdn.hackernoon.com/images/0*4Gzjgh9Y7Gu8KEtZ.gif" alt="" />
+          )}
+
+         
         </div>
 
         {/* mint button */}
-        <button className="h-16 w-full bg-red-600 rounded-full text-white mt-10 font-bold">
-          Mint NFT (0.01 ETH)
+        <button 
+        // onClick={mintNft}
+        disabled={loading || !address }
+        className="h-14 w-[80%] mx-auto bg-red-600 rounded-full text-white mt-2 font-bold disabled:bg-gray-400">
+          {/* { loading ? (
+            <>Loading</>
+          ) : claimedSupply === totalSupply?.toNumber() ? (
+            <>SOLD OUT</>
+          ) : !address ? (
+            <>Sign in to Mint</>
+          ): ( */}
+            <span className="font-bold">Mint NFT ({"priceInEth"} ETH)</span> 
+        
+          
         </button>
       </div>
     </div>
@@ -94,6 +198,7 @@ export const getServerSideProps: GetServerSideProps = async ({params}) => {
   const query = `*[_type == "collection" && slug.current == $id][0]{
     _id,
     title,
+    address,
     description,
     nftCollectionName,
     mainImage{
