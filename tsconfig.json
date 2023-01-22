@@ -19,6 +19,6 @@
       "node"
     ],
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "sanity/schemas/creator.ts", "sanity/schemas/collection.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx","./node_modules/@sanity/base/types/**/*.ts", "sanity/schemas/creator.ts", "sanity/schemas/collection.ts"],
   "exclude": ["node_modules"]
 }
