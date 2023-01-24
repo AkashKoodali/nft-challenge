@@ -1,4 +1,4 @@
 {
   "extends": "@sanity/eslint-config-studio",
-  "rules": { "import/no-unresolved": [2, { "ignore": ["^(all|part):"] }] }
+  "rules": { "import/no-unresolved": [2,{ "caseSensitive": false }] }
 }

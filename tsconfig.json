@@ -20,6 +20,5 @@
     ],
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx","./node_modules/@sanity/base/types/**/*.ts", "sanity/schemas/creator.ts", "sanity/schemas/collection.ts","node_modules/@sanity/types/parts","node_modules/@types"],
-  "exclude": ["node_modules"],
-  "files": ["@types/block-content-to-react.d.ts"]
+  "exclude": ["node_modules"]
 }
